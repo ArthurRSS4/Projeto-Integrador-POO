@@ -1,0 +1,23 @@
+[
+  {
+    "id_plano": "pln_basic",
+    "nome": "Basic",
+    "preco_mensal": 19.9,
+    "qtd_telas": 1,
+    "qualidade": "SD"
+  },
+  {
+    "id_plano": "pln_standard",
+    "nome": "Standard",
+    "preco_mensal": 34.9,
+    "qtd_telas": 2,
+    "qualidade": "HD"
+  },
+  {
+    "id_plano": "pln_premium",
+    "nome": "Premium",
+    "preco_mensal": 54.9,
+    "qtd_telas": 4,
+    "qualidade": "4K"
+  }
+]

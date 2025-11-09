@@ -1,0 +1,11 @@
+[
+  {
+    "id_pessoa": "usr_4f35e9df",
+    "nome": "arthur",
+    "email": "art@example.com",
+    "papel": "Usuario",
+    "cpf": "12345678910",
+    "assinaturas": [],
+    "perfis": []
+  }
+]

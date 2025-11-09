@@ -1,0 +1,10 @@
+[
+  {
+    "id_pagamento": "pay_5aacfda5",
+    "id_assinatura": "asn_ddf0a57d",
+    "valor": 19.9,
+    "metodo": "pix",
+    "data": "2025-11-09",
+    "status": "liquidado"
+  }
+]
