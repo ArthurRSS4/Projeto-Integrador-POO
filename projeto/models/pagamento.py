@@ -1,24 +1,26 @@
 # models/pagamento.py
 from datetime import date
-from utils.validator import Validator # Importar o Validator para checagem de preço
+from utils.validator import Validator # Importa o Validador para garantir integridade
 
 class Pagamento:
+    # Construtor: Inicializa o pagamento com status 'pendente' por padrão
     def __init__(self, id_pagamento: str, id_assinatura: str, valor: float, metodo: str, status: str = "pendente", 
                  data_pagamento: str = date.today().isoformat(), data_confirmacao: str = None):
         
-        # O Validator pode ser usado aqui para garantir a integridade dos dados na criação
+        # Uso do Validator: Garante que o valor é positivo
         Validator.preco(valor)
         
-        # Atributos PRIVADOS
+        # Atributos PRIVADOS (Encapsulamento)
         self.__id_pagamento = id_pagamento
         self.__id_assinatura = id_assinatura
         self.__valor = valor
         self.__metodo = metodo
-        self.__status = status # pendente | confirmado | falhado | estornado
+        self.__status = status # status: pendente | confirmado | falhado | estornado
         self.__data_pagamento = data_pagamento
         self.__data_confirmacao = data_confirmacao
 
     # --- GETTERS (@property) ---
+    # Permitem a leitura controlada dos atributos privados
     @property
     def id_pagamento(self) -> str:
         return self.__id_pagamento
@@ -34,6 +36,7 @@ class Pagamento:
     # ... Adicionar outros getters (id_assinatura, metodo, data_pagamento, data_confirmacao)
     
     # --- MÉTODO DE NEGÓCIO 1: Confirmação ---
+    # Regra: Altera o estado de 'pendente' para 'confirmado'
     def confirmar_pagamento(self):
         """Marca o pagamento como confirmado, registrando a data."""
         if self.__status != "pendente":
@@ -43,15 +46,17 @@ class Pagamento:
         self.__data_confirmacao = date.today().isoformat()
 
     # --- MÉTODO DE NEGÓCIO 2: Estorno/Reembolso ---
+    # Regra: Altera o estado de 'confirmado' para 'estornado'
     def estornar(self):
         """Reverte o pagamento, mudando o status para 'estornado'."""
         if self.__status != "confirmado":
             raise RuntimeError(f"Somente pagamentos confirmados podem ser estornados. Status atual: {self.__status}.")
         
-        # Aqui, poderíamos adicionar lógica de comunicação com um gateway de pagamento real, se existisse.
+        # Lógica de estorno
         self.__status = "estornado"
-        self.__data_confirmacao = None # Opcional: Remover data de confirmação ou adicionar data de estorno
+        self.__data_confirmacao = None 
         
+    # Método de Serialização: Converte o objeto para dicionário (usado pelo JSONRepository)
     def to_dict(self) -> dict:
         return {
             "id_pagamento": self.__id_pagamento,

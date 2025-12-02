@@ -6,5 +6,14 @@
     "metodo": "pix",
     "data": "2025-11-09",
     "status": "liquidado"
+  },
+  {
+    "id_pagamento": "pgm_6277a495",
+    "id_assinatura": "asn_5175969a",
+    "valor": 54.9,
+    "metodo": "pix",
+    "status": "confirmado",
+    "data_pagamento": "2025-12-02",
+    "data_confirmacao": "2025-12-02"
   }
 ]

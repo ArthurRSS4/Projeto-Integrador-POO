@@ -1,21 +1,22 @@
 # models/usuario.py
-from .pessoa import Pessoa # <--- LINHA CORRIGIDA: Importa a classe Pessoa
-from datetime import date # Assumindo que Pessoa usa date ou você usa em Usuario
+from .pessoa import Pessoa # Importa a classe base Pessoa (Herança)
+from datetime import date 
 
 class Usuario(Pessoa):
+    # Construtor: Inicializa o usuário, chamando o construtor da classe base (Pessoa)
     def __init__(self, id_pessoa: str, nome: str, email: str, cpf: str, 
                  assinaturas: list = None, perfis: list = None):
-        # ... (restante do código do __init__ com atributos privados)
+        
+        # Chama o construtor da classe Pessoa (Herança)
         super().__init__(id_pessoa, nome, email)
+        
+        # Atributos PRIVADOS
         self.__cpf = cpf 
-        self.__assinaturas = assinaturas if assinaturas is not None else []
-        self.__perfis = perfis if perfis is not None else []
+        self.__assinaturas = assinaturas if assinaturas is not None else [] # Composição: Usuário possui Assinaturas
+        self.__perfis = perfis if perfis is not None else [] # Composição: Usuário possui Perfis
     
-    # ... (métodos getters e de negócio)
-    
-    # ... (restante da classe)
-
     # --- GETTERS (@property) ---
+    # Permitem a leitura controlada dos atributos privados
     @property
     def cpf(self) -> str:
         return self.__cpf
@@ -27,27 +28,27 @@ class Usuario(Pessoa):
     @property
     def perfis(self) -> list:
         return self.__perfis
-
-    # Nota: O método 'papel' foi removido daqui e deve estar em 'Pessoa' ou outra classe base,
-    # conforme a orientação do professor.
     
+    # --- MÉTODOS DE NEGÓCIO ---
+    
+    # Adiciona um Perfil à lista (Composição)
     def adicionar_perfil(self, perfil):
         self.__perfis.append(perfil)
 
+    # Adiciona uma Assinatura à lista (Composição)
     def adicionar_assinatura(self, assinatura):
         self.__assinaturas.append(assinatura)
 
-    # Nota: Como as Assinaturas e Perfis serão dicionários ao reconstruir a partir do JSON,
-    # é necessário um tratamento para garantir que o to_dict funcione corretamente.
-    
+    # Método de Serialização: Converte o objeto para dicionário (usado pelo JSONRepository)
     def to_dict(self) -> dict:
+        # Pega os dados básicos da classe Pessoa
         base = super().to_dict()
         
-        # Serialização defensiva: verifica se o item é um objeto (para chamar to_dict)
-        # ou se já é um dicionário (vindo da persistência).
+        # Serializa listas de objetos filhos (Assinaturas e Perfis) para dicionários
         assinaturas_dict = [a.to_dict() if hasattr(a, 'to_dict') else a for a in self.__assinaturas]
         perfis_dict = [p.to_dict() if hasattr(p, 'to_dict') else p for p in self.__perfis]
 
+        # Adiciona atributos específicos do Usuário
         base.update({
             "cpf": self.__cpf,
             "assinaturas": assinaturas_dict,

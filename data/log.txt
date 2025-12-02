@@ -4,3 +4,10 @@
 2025-11-09T09:58:06.689225 [INFO] Assinatura criada: asn_ddf0a57d
 2025-11-09T09:58:44.672503 [INFO] Pagamento pay_5aacfda5 registrado
 2025-12-02T05:03:07.426540 [INFO] Usuário cadastrado: usr_0ed531f9
+2025-12-02T05:54:16.026462 [INFO] Assinatura criada: asn_5175969a
+2025-12-02T05:54:22.127645 [ERROR] name 'registrar_pagamento' is not defined
+2025-12-02T05:54:25.476975 [ERROR] name 'registrar_pagamento' is not defined
+2025-12-02T05:55:18.516882 [ERROR] name 'registrar_pagamento' is not defined
+2025-12-02T05:58:21.319281 [INFO] Usuário cadastrado: usr_25db8555
+2025-12-02T05:58:43.469953 [INFO] Assinatura criada: asn_fe565974
+2025-12-02T05:59:17.044471 [INFO] Pagamento pgm_6277a495 confirmado para assinatura asn_5175969a.

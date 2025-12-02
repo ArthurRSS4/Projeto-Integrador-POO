@@ -7,5 +7,23 @@
     "data_inicio": "2025-11-09",
     "data_cancelamento": null,
     "historico": []
+  },
+  {
+    "id_assinatura": "asn_5175969a",
+    "id_usuario": "usr_0ed531f9",
+    "id_plano": "pln_premium",
+    "status": "ativa",
+    "data_inicio": "2025-12-02",
+    "data_cancelamento": null,
+    "historico": []
+  },
+  {
+    "id_assinatura": "asn_fe565974",
+    "id_usuario": "usr_25db8555",
+    "id_plano": "pln_basic",
+    "status": "ativa",
+    "data_inicio": "2025-12-02",
+    "data_cancelamento": null,
+    "historico": []
   }
 ]

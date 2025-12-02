@@ -1,18 +1,17 @@
 [
   {
-    "id_pessoa": "usr_4f35e9df",
-    "nome": "arthur",
-    "email": "art@example.com",
-    "papel": "Usuario",
-    "cpf": "12345678910",
-    "assinaturas": [],
-    "perfis": []
-  },
-  {
     "id_pessoa": "usr_0ed531f9",
     "nome": "renato",
     "email": "renato@hotmail.com",
     "cpf": "89078645610",
+    "assinaturas": [],
+    "perfis": []
+  },
+  {
+    "id_pessoa": "usr_25db8555",
+    "nome": "gustavo",
+    "email": "gustavo@gmail.com",
+    "cpf": "89078070045",
     "assinaturas": [],
     "perfis": []
   }
