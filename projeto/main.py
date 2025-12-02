@@ -148,4 +148,4 @@ def menu():
             console.print(f"[bold red]ERRO:[/bold red] {e}")
 
 if __name__ == "__main__":
-    menu()1
+    menu()
