@@ -35,11 +35,20 @@ class JSONRepository:
 
     def update(self, key: str, value: str, new_dict: Dict) -> bool:
         data = self._read_all()
+        updated = False # Flag para rastrear se o item foi encontrado e alterado
+        
         for i, item in enumerate(data):
             if item.get(key) == value:
                 data[i] = new_dict
-                self._write_all(data)
-                return True
+                updated = True
+                # CORREÇÃO: Usamos 'break' para sair do loop imediatamente após encontrar o item.
+                break 
+        
+        # CORREÇÃO: Escrever no arquivo APENAS UMA VEZ, se houver alteração.
+        if updated:
+            self._write_all(data)
+            return True
+            
         return False
 
     def delete(self, key: str, value: str) -> bool:

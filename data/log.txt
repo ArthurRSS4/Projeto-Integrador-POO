@@ -3,3 +3,4 @@
 2025-11-09T09:57:28.655472 [INFO] Usuário cadastrado: usr_4f35e9df
 2025-11-09T09:58:06.689225 [INFO] Assinatura criada: asn_ddf0a57d
 2025-11-09T09:58:44.672503 [INFO] Pagamento pay_5aacfda5 registrado
+2025-12-02T05:03:07.426540 [INFO] Usuário cadastrado: usr_0ed531f9

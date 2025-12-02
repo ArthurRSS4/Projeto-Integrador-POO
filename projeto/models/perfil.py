@@ -1,19 +1,29 @@
-# models/perfil.py
-class Perfil:
-    def __init__(self, id_perfil: str, nome: str, controle_parental: bool = False):
-        self.id_perfil = id_perfil
-        self.nome = nome
-        self.controle_parental = controle_parental
-        self.preferencias = {"idioma": "pt-BR", "generos": []}
+# models/perfil.py (Bloco sugerido)
 
-    def adicionar_genero(self, genero: str):
-        if genero not in self.preferencias["generos"]:
-            self.preferencias["generos"].append(genero)
+class Perfil:
+    def __init__(self, id_perfil: str, nome: str, idade: int, genero: str):
+        self.__id_perfil = id_perfil
+        self.__nome = nome
+        self.__idade = idade
+        self.__genero = genero # NOVO ATRIBUTO
+        
+    # --- GETTERS (@property) ---
+    # ... (id_perfil, nome, idade)
+    
+    @property
+    def genero(self) -> str:
+        return self.__genero
+    
+    # --- SETTER (Exemplo) ---
+    @genero.setter
+    def genero(self, novo_genero: str):
+        # Aqui, você pode adicionar validação para garantir que o gênero seja válido
+        self.__genero = novo_genero
 
     def to_dict(self) -> dict:
         return {
-            "id_perfil": self.id_perfil,
-            "nome": self.nome,
-            "controle_parental": self.controle_parental,
-            "preferencias": self.preferencias,
+            "id_perfil": self.__id_perfil,
+            "nome": self.__nome,
+            "idade": self.__idade,
+            "genero": self.__genero,
         }

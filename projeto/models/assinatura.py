@@ -2,50 +2,91 @@
 from datetime import date
 
 class Assinatura:
-    def __init__(self, id_assinatura: str, id_usuario: str, id_plano: str, status: str = "ativa"):
-        self.id_assinatura = id_assinatura
-        self.id_usuario = id_usuario
-        self.id_plano = id_plano
-        self.status = status  # ativa | pausada | cancelada
-        self.data_inicio = date.today().isoformat()
-        self.data_cancelamento = None
-        self.historico = []  # agregação: eventos da assinatura
+    # Ajuste: Adicionado 'historico' ao __init__ para reconstrução do objeto
+    def __init__(self, id_assinatura: str, id_usuario: str, id_plano: str, status: str = "ativa", 
+                 data_inicio: str = date.today().isoformat(), data_cancelamento: str = None, 
+                 historico: list = None):
+        # Atributos PRIVADOS
+        self.__id_assinatura = id_assinatura
+        self.__id_usuario = id_usuario
+        self.__id_plano = id_plano
+        self.__status = status  # ativa | pausada | cancelada
+        self.__data_inicio = data_inicio
+        self.__data_cancelamento = data_cancelamento
+        self.__historico = historico if historico is not None else [] 
 
+    # --- GETTERS (@property) ---
+    
+    @property
+    def id_assinatura(self) -> str:
+        return self.__id_assinatura
+
+    @property
+    def id_usuario(self) -> str:
+        return self.__id_usuario
+    
+    @property
+    def id_plano(self) -> str:
+        return self.__id_plano
+
+    @property
+    def status(self) -> str:
+        return self.__status
+
+    @property
+    def data_inicio(self) -> str:
+        return self.__data_inicio
+    
+    @property
+    def data_cancelamento(self) -> str | None:
+        return self.__data_cancelamento
+    
+    @property
+    def historico(self) -> list:
+        return self.__historico
+
+    # --- SETTER (Apenas para o que pode ser alterado diretamente) ---
+    # Nota: Em POO, o setter para 'status' não é recomendado; é melhor usar o método de negócio (ex: pausar).
+    # O 'id_plano' é alterado internamente pelo método 'trocar_plano'.
+
+    # --- MÉTODOS DE NEGÓCIO (Acessando atributos privados) ---
+    
     def pausar(self):
-        if self.status != "ativa":
+        if self.__status != "ativa":
             raise RuntimeError("Somente assinaturas ativas podem ser pausadas.")
-        self.status = "pausada"
-        self.historico.append({"evento": "pausa", "data": date.today().isoformat()})
+        self.__status = "pausada"
+        self.__historico.append({"evento": "pausa", "data": date.today().isoformat()})
 
     def retomar(self):
-        if self.status != "pausada":
+        if self.__status != "pausada":
             raise RuntimeError("Somente assinaturas pausadas podem ser retomadas.")
-        self.status = "ativa"
-        self.historico.append({"evento": "retomada", "data": date.today().isoformat()})
+        self.__status = "ativa"
+        self.__historico.append({"evento": "retomada", "data": date.today().isoformat()})
 
     def cancelar(self):
-        if self.status == "cancelada":
+        if self.__status == "cancelada":
             raise RuntimeError("Assinatura já cancelada.")
-        self.status = "cancelada"
-        self.data_cancelamento = date.today().isoformat()
-        self.historico.append({"evento": "cancelamento", "data": self.data_cancelamento})
+        self.__status = "cancelada"
+        self.__data_cancelamento = date.today().isoformat()
+        self.__historico.append({"evento": "cancelamento", "data": self.__data_cancelamento})
 
     def trocar_plano(self, novo_id_plano: str):
-        self.historico.append({
+        self.__historico.append({
             "evento": "troca_plano",
-            "de": self.id_plano,
+            "de": self.__id_plano,
             "para": novo_id_plano,
             "data": date.today().isoformat()
         })
-        self.id_plano = novo_id_plano
+        # Atribuição ao atributo privado
+        self.__id_plano = novo_id_plano
 
     def to_dict(self) -> dict:
         return {
-            "id_assinatura": self.id_assinatura,
-            "id_usuario": self.id_usuario,
-            "id_plano": self.id_plano,
-            "status": self.status,
-            "data_inicio": self.data_inicio,
-            "data_cancelamento": self.data_cancelamento,
-            "historico": self.historico,
+            "id_assinatura": self.__id_assinatura,
+            "id_usuario": self.__id_usuario,
+            "id_plano": self.__id_plano,
+            "status": self.__status,
+            "data_inicio": self.__data_inicio,
+            "data_cancelamento": self.__data_cancelamento,
+            "historico": self.__historico,
         }
